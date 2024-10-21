@@ -13,8 +13,8 @@ int main(void)
 
 	srand(time(0));
 	n = rand() - RAND_MAX / 2;
-	prinf("Last digit of ");
-	prinf("%d is %d ", n, lastdigit);
+	printf("Last digit of ");
+	printf("%d is %d ", n, lastdigit);
 	if (lastdigit > 5)
 	{
 		printf("and is grater than 5");
