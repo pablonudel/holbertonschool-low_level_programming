@@ -1,9 +1,5 @@
-#include <stdio.h>
-/**
- *_putchar - prints _putchar
- *Return: 0
- */
-void _putchar(void)
-{
-	printf("_putchar\n");
-}
+#ifndef main_h
+#define main_h
+
+void _putchar(char c);
+#endif
