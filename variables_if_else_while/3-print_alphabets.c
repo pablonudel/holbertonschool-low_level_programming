@@ -9,12 +9,13 @@ int main(void)
 {
 	char chl[26] = "abcdefghijklmnopqrstuvwxyz";
 	char chu[26] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	int i;
 
-	for (int i = 0; i < 26; i++)
+	for (i = 0; i < 26; i++)
 	{
 		putchar(chl[i]);
 	}
-	for (int i = 0; i < 26; i++)
+	for (i = 0; i < 26; i++)
 	{
 		putchar(chu[i]);
 	}
