@@ -1,4 +1,3 @@
-#include <ctype.h>
 #include "main.h"
 /**
  * _isalpha - checks for alphabetic character
@@ -8,7 +7,7 @@
  */
 int _isalpha(int c)
 {
-	if (isalpha(c) > 0)
+	if ((c > 64 && c < 91) || (c > 96 && c < 123))
 	{
 		return (1);
 	}
