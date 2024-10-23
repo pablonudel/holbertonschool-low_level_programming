@@ -8,11 +8,12 @@
 int print_last_digit(int n)
 {
 	int p;
+
 	if (n < 0 && n != 0)
 	{
 		n = -n;
 	}
-	
+
 	p = n % 10;
 	if (p < 0 && p != 0)
 	{
