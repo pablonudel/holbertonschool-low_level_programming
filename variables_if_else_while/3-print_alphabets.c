@@ -7,16 +7,16 @@
  */
 int main(void)
 {
-	char chl;
-	char chu;
+	char chl[26] = "abcdefghijklmnopqrstuvwxyz";
+	char chu[26] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
-	for (chl = 97; chl < 123; chl++)
+	for (int i = 0; i < 26; i++)
 	{
-		putchar(chl);
+		putchar(chl[i]);
 	}
-	for (chu = 65; chu < 97; chu++)
+	for (int i = 0; 1 < 26; i++)
 	{
-		putchar(chu);
+		putchar(chu[i]);
 	}
 	putchar(10);
 
