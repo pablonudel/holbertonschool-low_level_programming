@@ -11,6 +11,7 @@ void jack_bauer(void)
 
 	hh = 0;
 	mm = 0;
+
 	
 	while (hh != 23 && mm != 59)
 	{
@@ -22,18 +23,5 @@ void jack_bauer(void)
 				hh++;
 			}
 		}
-		
-		if (hh < 10)
-		{
-			_putchar('0');
-		}
-		_putchar(hh);
-		_putchar(':');
-		if (mm < 10)
-		{
-			_putchar('0');
-		}
-		_putchar(mm);
-		_putchar('\n');
 	}
 }
