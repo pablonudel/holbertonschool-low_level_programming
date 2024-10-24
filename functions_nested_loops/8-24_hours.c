@@ -14,21 +14,20 @@ void jack_bauer(void)
 	int mld;
 
 	hh = 0;
-
 	mm = 0;
 
-	do
+	while (hh < 24 && mm < 60)
 	{
 		mld = mm % 10;
-        	mfd = (mm - mld) / 10;
+		mfd = (mm - mld) / 10;
 		hld = hh % 10;
-        	hfd = (hh - hld) / 10;
-		
+		hfd = (hh - hld) / 10;
+
 		_putchar('0' + hfd);
 		_putchar('0' + hld);
 		_putchar(':');
 		_putchar('0' + mfd);
-		_putchar('0' + mld);	
+		_putchar('0' + mld);
 		_putchar('\n');
 
 		if (mm == 59)
@@ -36,9 +35,6 @@ void jack_bauer(void)
 			hh++;
 			mm = -1;
 		}
-
 		mm++;
 	}
-	while (hh < 24 && mm < 60);
-
 }
