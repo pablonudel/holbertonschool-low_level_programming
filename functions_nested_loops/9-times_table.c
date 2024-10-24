@@ -14,22 +14,22 @@ void times_table(void)
 		{
 			r = num1 * num2;
 			ld = r % 10;
-			fd = (r - ld) / 10;
-
+			fd = r / 10;
 			if (num2 != 0)
 			{
 				_putchar(',');
-				_putchar(' ');
-
-				if (r >= 10)
+				if (fd)
 				{
 					_putchar(' ');
 					_putchar('0' + fd);
 				}
+				else
+				{
+					_putchar(' ');
+					_putchar(' ');
+				}
 			}
-
 			_putchar('0' + ld);
-
 			if (num2 == 9)
 			{
 				_putchar('\n');
