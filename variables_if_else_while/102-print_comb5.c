@@ -7,7 +7,7 @@
 int main(void)
 {
 	int a, b;
-	
+
 	for (a = 0; a < 100; ++a)
 	{
 		for (b = a + 1; b < 100; ++b)
@@ -17,7 +17,7 @@ int main(void)
 			putchar(' ');
 			putchar('0' + (b / 10));
 			putchar('0' + (b % 10));
-			
+
 			if (b == 99 && a == b - 1)
 			{
 				putchar('\n');
