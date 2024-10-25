@@ -8,17 +8,14 @@ int main(void)
 {
 	int fstDig, lstDig;
 
-	fstDig = 0;
-	lstDig = fstDig + 1;
-
-	for (fstDig = 0; fstDig < lstDig ; fstDig++)
+	for (fstDig = 0; fstDig <= 9 ; fstDig++)
 	{
 		for (lstDig = fstDig + 1; lstDig < 10; lstDig++)
 		{
 			putchar('0' + fstDig);
 			putchar('0' + lstDig);
 
-			if (fstDig == 8)
+			if (fstDig == lstDig - 1 && lstDig == 9)
 			{
 				putchar('\n');
 			}
