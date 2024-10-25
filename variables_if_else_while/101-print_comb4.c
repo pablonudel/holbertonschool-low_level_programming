@@ -8,11 +8,7 @@ int main(void)
 {
 	int fstDig, sndDig, lstDig;
 
-	fstDig = 0;
-	sndDig = fstDig + 1;
-	lstDig = sndDig + 1;
-
-	for (fstDig = 0; fstDig < lstDig ; fstDig++)
+	for (fstDig = 0; fstDig < 10 ; fstDig++)
 	{
 		for (sndDig = fstDig + 1; sndDig < 10; sndDig++)
 		{
@@ -22,7 +18,7 @@ int main(void)
 				putchar('0' + sndDig);
 				putchar('0' + lstDig);
 
-				if (fstDig == 7)
+				if (lstDig == 9 && sndDig == lstDig - 1 && fstDig == lstDig -2) 
 				{
 					putchar('\n');
 				}
