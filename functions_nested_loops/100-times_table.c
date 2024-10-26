@@ -9,9 +9,9 @@
 void print_sequence(int r)
 {
 	_putchar(',');
+	_putchar(' ');
 	if (r / 100)
 	{
-		_putchar(' ');
 		_putchar('0' + (r / 100));
 		_putchar('0' + ((r / 10) % 10));
 		_putchar('0' + (r % 10));
@@ -19,13 +19,11 @@ void print_sequence(int r)
 	else if (r / 10 && r < 100)
 	{
 		_putchar(' ');
-		_putchar(' ');
 		_putchar('0' + (r / 10));
 		_putchar('0' + (r % 10));
 	}
 	else
 	{
-		_putchar(' ');
 		_putchar(' ');
 		_putchar(' ');
 		_putchar('0' + (r % 10));
