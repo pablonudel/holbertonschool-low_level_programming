@@ -21,11 +21,11 @@ void print_times_table(int n)
 				if (c != 0)
 				{
 					_putchar(',');
-					if (r / 100 && r > 99)
+					if (r / 100)
 					{
 						_putchar(' ');
 						_putchar('0' + (r / 100));
-						_putchar('0' + (r / 10));
+						_putchar('0' + ((r / 10) % 10));
 						_putchar('0' + (r % 10));
 					}
 					else if (r / 10 && r < 100)
@@ -43,7 +43,10 @@ void print_times_table(int n)
 						_putchar('0' + (r % 10));
 					}
 				}
-				_putchar('0' + (r % 10));
+				else
+				{
+					_putchar('0' + (r % 10));
+				}
 			}
 			_putchar('\n');
 		}
