@@ -14,7 +14,7 @@ int main(void)
 	a = 1;
 	b = 2;
 	r = 0;
-	total = 0;
+	total = 2;
 
 	while (r < 4000001)
 	{
