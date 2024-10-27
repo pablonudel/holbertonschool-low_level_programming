@@ -18,7 +18,7 @@ int main(void)
 	for (i = 1; i < 97; ++i)
 	{
 		if (i == 96)
-			printf("%lu\n", i, a + b);
+			printf("%lu\n", a + b);
 		else
 			printf("%lu, ", a + b);
 
