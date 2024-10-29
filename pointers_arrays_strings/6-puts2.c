@@ -9,20 +9,22 @@
  */
 void puts2(char *str)
 {
-	int i = 0, index = -1;
+	int i = 0, index = 0;
 
 	while (str[i] != '\0')
 	{
 		if (str[i] == ' ')
 		{
 			i++;
+			index = 0;
 		}
 
 		if (str[i] != ' ')
 		{
-			index++;
 			if (index % 2 == 0)
 				_putchar(str[i]);
+
+			index++;
 		}
 
 		i++;
