@@ -16,10 +16,13 @@ void _puts(char *str)
 		length = s - str;
 	}
 
-	for (i = 0; i < length + 1; i++)
-		{
-			_putchar(str[i]);
-		}
+	if (length != 0)
+	{
+		for (i = 0; i < length + 1; i++)
+			{
+				_putchar(str[i]);
+			}
+	}
 	if (i == length + 1 || length == 0)
 		_putchar('\n');
 }
