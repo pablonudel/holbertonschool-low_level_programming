@@ -22,7 +22,7 @@ void _puts(char *str)
 		{
 			_putchar(str[i]);
 		}
+		if (i == length + 1)
+			_putchar('\n');
 	}
-	if (i == length + 1)
-		_putchar('\n');
 }
