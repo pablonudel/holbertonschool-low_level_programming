@@ -19,6 +19,10 @@ void puts2(char *str)
 			if (n % 2 == 0)
 				_putchar(str[i]);
 		}
+		else
+		{
+			break;
+		}
 
 		i++;
 	}
