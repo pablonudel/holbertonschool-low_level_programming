@@ -25,4 +25,8 @@ void _puts(char *str)
 		if (i == length + 1)
 			_putchar('\n');
 	}
+	else
+	{
+		_putchar('\n');
+	}
 }
