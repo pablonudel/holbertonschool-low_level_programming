@@ -21,7 +21,7 @@ void puts2(char *str)
 		}
 		else
 		{
-			break;
+			_putchar(str[i]);
 		}
 
 		i++;
