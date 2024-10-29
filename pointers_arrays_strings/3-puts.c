@@ -7,8 +7,8 @@
  */
 void _puts(char *str)
 {
-	char *s;
 	int i;
+	char *s;
 	int length;
 
 	for (s = str; *s; ++s)
@@ -16,17 +16,9 @@ void _puts(char *str)
 		length = s - str;
 	}
 
-	if (length > 0)
+	for (i = 0; str && i < length + 1; i++)
 	{
-		for (i = 0; i < length + 1; i++)
-			{
-				_putchar(str[i]);
-			}
-		if (i == length + 1)
-			_putchar('\n');
+		_putchar(str[i]);
 	}
-	else
-	{
-		_putchar('\n');
-	}
+	_putchar('\n');
 }
