@@ -9,19 +9,20 @@
  */
 void puts2(char *str)
 {
-	int i = 0, n = 0;
+	int i = 0, index = -1;
 
 	while (str[i] != '\0')
 	{
-		if (str[i] > 47 && str[i] < 58)
+		if (str[i] == ' ')
 		{
-			n = n * 10 + (str[i] - 48);
-			if (n % 2 == 0)
-				_putchar(str[i]);
+			i++;
 		}
-		else
+
+		if (str[i] != ' ')
 		{
-			_putchar(str[i]);
+			index++;
+			if (index % 2 == 0)
+				_putchar(str[i]);
 		}
 
 		i++;
