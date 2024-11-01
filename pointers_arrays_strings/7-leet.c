@@ -9,13 +9,13 @@ char *leet(char *s)
 {
 	int chars[] = {'a', 'e', 'o', 't', 'l'};
 	int leet[] = {'4', '3', '0', '7', '1'};
-	int i, ichars;
+	int i, ichars = 0;
 
 	for (i = 0; s[i] != '\0'; i++)
 	{
 		while (ichars < 5)
 		{
-			if (i >= 0 && (s[i] == chars[ichars] || s[i] == (chars[ichars] - 32)))
+			if (s[i] == chars[ichars] || s[i] == (chars[ichars] - 32))
 			{
 				s[i] = leet[ichars];
 			}
