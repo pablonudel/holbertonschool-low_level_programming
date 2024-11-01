@@ -11,7 +11,7 @@ char *leet(char *s)
 	int leet[] = {'4', '3', '0', '7', '1'};
 	int i, ichars;
 
-	for (i = 0; s[i] != '\0'; i++)
+	for (i = 0; s[0] != '\0' && s[i] != '\0'; i++)
 	{
 		while (ichars < 5)
 		{
