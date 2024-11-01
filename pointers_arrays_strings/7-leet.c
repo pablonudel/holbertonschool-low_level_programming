@@ -11,11 +11,11 @@ char *leet(char *s)
 	int leet[] = {'4', '3', '0', '7', '1'};
 	int i, ichars;
 
-	for (i = 0; s[0] != '\0' && s[i] != '\0'; i++)
+	for (i = 0; s[i] != '\0'; i++)
 	{
 		while (ichars < 5)
 		{
-			if (s[i] == chars[ichars] || s[i] == (chars[ichars] - 32))
+			if (ichars >= 0 && (s[i] == chars[ichars] || s[i] == (chars[ichars] - 32)))
 			{
 				s[i] = leet[ichars];
 			}
