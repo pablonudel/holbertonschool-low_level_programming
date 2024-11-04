@@ -8,7 +8,7 @@
  */
 unsigned int _strspn(char *s, char *accept)
 {
-	unsigned int sum = 0, len = 0, i, x;
+	unsigned int len = 0, i, x;
 
 	while (s[len] != '\0')
 		len++;
@@ -18,9 +18,9 @@ unsigned int _strspn(char *s, char *accept)
 		for (x = 0; accept[x] != '\0'; x++)
 		{
 			if (s[i] == accept[x])
-				sum += 1;
+				len -= 1;
 		}
 	}
 
-	return (len - sum);
+	return (len);
 }
