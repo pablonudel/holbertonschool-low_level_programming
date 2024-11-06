@@ -23,7 +23,7 @@ int check_prime(int n, int i)
  */
 int is_prime_number(int n)
 {
-	if (n <= 1 || (n % 2 == 0 && n > 2) || n % 5 == 0)
+	if (n <= 1 || (n % 2 == 0 && n > 2) || (n % 5 == 0 && n > 5))
 		return (0);
 
 	return (check_prime(n, 3));
