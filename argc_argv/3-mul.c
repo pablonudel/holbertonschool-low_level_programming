@@ -5,7 +5,7 @@
  * @argc: int, arguments supplied to the program
  * @argv: char, array of pointers to the strings of the arguments
  *
- * Return: 0
+ * Return: 0 or 1.
  */
 int main(int argc, char *argv[])
 {
