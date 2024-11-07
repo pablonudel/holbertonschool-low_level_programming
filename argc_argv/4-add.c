@@ -9,7 +9,8 @@
  */
 int main(int argc, char *argv[])
 {
-	int i, res = 0;
+	int i;
+	unsigned int res = 0;
 
 	if (argc < 2)
 	{
@@ -29,6 +30,6 @@ int main(int argc, char *argv[])
 			res += atoi(argv[i]);
 
 	}
-	printf("%d\n", res);
+	printf("%u\n", res);
 	return (0);
 }
