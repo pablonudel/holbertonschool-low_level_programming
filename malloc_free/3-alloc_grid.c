@@ -1,4 +1,4 @@
-#include <stdio.h>
+#include "main.h"
 #include <stdlib.h>
 /**
  * alloc_grid - returns a pointer to a 2 dimensional array of integers.
@@ -15,17 +15,15 @@ int **alloc_grid(int width, int height)
 		return (NULL);
 
 	g = malloc(height * sizeof(int *));
-
 	if (g == NULL)
 	{
-		free (g);
+		free(g);
 		return (NULL);
 	}
 
 	for (i = 0; i < height; i++)
 	{
 		g[i] = malloc(width * sizeof(int));
-
 		if (g[i] == NULL)
 		{
 			for (i--; i >= 0; i--)
@@ -35,12 +33,10 @@ int **alloc_grid(int width, int height)
 		}
 	}
 
-
 	for (i = 0; i < height; i++)
 	{
 		for (j = 0; j < width; j++)
 			g[i][j] = 0;
 	}
-
 	return (g);
 }
