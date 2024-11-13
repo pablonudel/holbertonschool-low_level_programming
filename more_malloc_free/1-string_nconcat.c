@@ -19,10 +19,10 @@ char *string_nconcat(char *s1, char *s2, unsigned int n)
 	if (s2 == NULL)
 		s2 = "";
 
-	while (s1[s1len])
+	while (s1[s1len] != '\0')
 		s1len++;
 
-	str = malloc(sizeof(char) * (s1len + n));
+	str = malloc(sizeof(char) * (s1len + n + 1));
 	if (str == NULL)
 	{
 		free(str);
