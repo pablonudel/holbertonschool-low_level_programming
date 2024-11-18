@@ -12,7 +12,7 @@ int main(int argc, char *argv[])
 {
 
 	int a, b, calc;
-	char op;
+	int (*op)(int, int);
 
 	if (argc != 4)
 	{
@@ -22,14 +22,14 @@ int main(int argc, char *argv[])
 
 	a = atoi(argv[1]);
 	b = atoi(argv[3]);
-	op = argv[2][0];
+	op = get_op_func(argv[2]);
 
-	if (op != 43 && op != 45 && op != 42 && op != 47 && op != 37)
+	if (op == NULL || argv[2][1] != '\0')
 	{
 		printf("Error\n");
 		exit(99);
 	}
-	if (b == 0 && (op == 47 || op == 37))
+	if (b == 0 && (argv[2][0] == 47 || argv[2][0] == 37))
 	{
 		printf("Error\n");
 		exit(100);
