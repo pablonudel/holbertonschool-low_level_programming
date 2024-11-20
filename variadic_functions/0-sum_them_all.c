@@ -5,18 +5,18 @@
  * @n: unsigned int for count
  * @...: multiples args
  *
- * Return: int - result
+ * Return: int - result or 0 if n is 0.
  */
 int sum_them_all(const unsigned int n, ...)
 {
-	unsigned int i;
 	int res = 0;
+	unsigned int i;
 	va_list args;
 
 	if (n == 0)
 		return (0);
 
-	va_start(args, n);
+	va_start(args, 0);
 
 	for (i = 0; i < n; i++)
 		res += va_arg(args, int);
