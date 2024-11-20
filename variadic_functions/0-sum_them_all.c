@@ -3,7 +3,6 @@
 /**
  * sum_them_all - sum of all its parameters.
  * @n: unsigned int for count
- * @...: multiples args
  *
  * Return: int - result or 0 if n is 0.
  */
