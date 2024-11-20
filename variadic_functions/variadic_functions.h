@@ -14,12 +14,12 @@ void print_all(const char * const format, ...);
  * @op: The type option
  * @f: The function associated
  *
- * Structure for takes n elements of a string
- * and associates a function for each one.
+ * Holds a char that is associated to a type
+ * and the function pointer to print an element.
  */
 typedef struct op
 {
-        char *op;
-        void (*f)(va_list args);
+	char *op;
+	void (*f)(va_list args);
 } op_t;
 #endif
