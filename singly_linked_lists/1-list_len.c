@@ -2,7 +2,7 @@
 /**
  * list_len - function that returns the number of elements
  * in a linked list_t list.
- * @h: list_h pointer to a string
+ * @h: list_h pointer to the list
  *
  * Return: size_t - the number of nodes or 0 if no nodes.
  */
