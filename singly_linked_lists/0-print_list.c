@@ -8,11 +8,7 @@
 size_t print_list(const list_t *h)
 {
 	const list_t *current = h;
-	unsigned int i = 0;
-
-	if (!current)
-		printf("[0] (nil)\n");
-		return (1);
+	int i = 0;
 
 	while (current != NULL)
 	{
