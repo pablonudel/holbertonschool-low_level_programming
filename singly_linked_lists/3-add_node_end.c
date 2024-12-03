@@ -2,7 +2,7 @@
 /**
  * add_node_end - function that adds a new node at the end
  * of a list_t list.
- * @head: list_t double pointer
+ * @head: list_t list
  * @str: character pointer
  *
  * Return: the address of the new element, or NULL if it failed
