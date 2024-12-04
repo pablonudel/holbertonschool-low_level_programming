@@ -10,23 +10,22 @@
  */
 ssize_t read_textfile(const char *filename, size_t letters)
 {
-	int fd, len;
-	ssize_t nchars;
+	int fd, len_r, len_w;
 	char buffer[1024];
 
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
 		return (0);
 
-	len = read(fd, buffer, letters);
-	if (len == -1)
+	len_r = read(fd, buffer, letters);
+	if (len_r == -1)
 	{
 		close(fd);
 		return (0);
 	}
 
-	nchars = write(STDOUT_FILENO, buffer, len);
-	if (nchars == -1)
+	len_w = write(STDOUT_FILENO, buffer, len_r);
+	if (len_w == -1 || len_w != len_r)
 	{
 		close(fd);
 		return (0);
@@ -34,5 +33,5 @@ ssize_t read_textfile(const char *filename, size_t letters)
 
 	close(fd);
 
-	return (nchars);
+	return (len_w);
 }
