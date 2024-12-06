@@ -20,8 +20,8 @@ int copy_file(char *file_from, char *file_to)
 	fd_to = open(file_to, O_RDWR | O_CREAT | O_TRUNC, 0664);
 	if (fd_to == -1)
 	{
-		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", file_to);
-		exit(98);
+		dprintf(STDERR_FILENO, "Error: Can't write to file %s\n", file_to);
+		exit(99);
 	}
 
 	while (tmp_len == 1024)
@@ -35,8 +35,8 @@ int copy_file(char *file_from, char *file_to)
 		fw = write(fd_to, buffer, tmp_len);
 		if (fw == -1)
 		{
-			dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", file_to);
-			exit(98);
+			dprintf(STDERR_FILENO, "Error: Can't write to file %s\n", file_to);
+			exit(99);
 		}
 	}
 
