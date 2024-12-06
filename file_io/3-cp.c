@@ -47,12 +47,12 @@ void copy_file(char *file_from, char *file_to)
 	do {
 		if (fd_from == -1 || fr == -1)
 			f_error(98, fd_from, 0, file_from, buffer);
-		fw = write(fd_to, buffer, fr);
 
+		fw = write(fd_to, buffer, fr);
 		if (fd_to == -1 || fw == -1)
 			f_error(99, 0, fd_to, file_to, buffer);
+		
 		fr = read(fd_from, buffer, 1024);
-
 		fd_to = open(file_to, O_WRONLY | O_APPEND);
 	} while (fr > 0);
 
@@ -60,13 +60,13 @@ void copy_file(char *file_from, char *file_to)
 	fc = close(fd_from);
 	if (fc == -1)
 	{
-		dprintf(STDERR_FILENO, "Error: Can't close fd  %d\n", fd_from);
+		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", fd_from);
 		exit(100);
 	}
 	fc = close(fd_to);
 	if (fc == -1)
 	{
-		dprintf(STDERR_FILENO, "Error: Can't close fd  %d\n", fd_to);
+		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", fd_to);
 		exit(100);
 	}
 }
