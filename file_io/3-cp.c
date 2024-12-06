@@ -41,7 +41,7 @@ void copy_file(char *file_from, char *file_to)
 	if (fd_to == -1)
 		error_msg(99, file_to, 'w', 0);
 
-	while (tmp_len > 0)
+	while (tmp_len == 1024)
 	{
 		tmp_len = read(fd_from, buffer, 1024);
 		if (tmp_len == -1)
