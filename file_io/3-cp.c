@@ -69,12 +69,12 @@ int main(int argc, char *argv[])
 
 	do {
 		if (fr == -1)
-			f_error(fr, 0, argv, buffer);
+			f_error(-1, 0, argv, buffer);
 		fw = write(fd_to, buffer, fr);
 		if (fw == -1)
-			f_error(0, fw, argv, buffer);
+			f_error(0, -1, argv, buffer);
 		fr = read(fd_from, buffer, 1024);
-		fd_to = open(argv[2], O_WRONLY | O_APPEND);
+		fd_to = open(argv[2], O_RDWR | O_APPEND);
 	} while (fr > 0);
 
 	free(buffer);
