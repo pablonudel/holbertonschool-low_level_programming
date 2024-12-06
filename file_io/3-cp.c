@@ -57,6 +57,7 @@ void copy_file(char *file_from, char *file_to)
 		fd_to = open(file_to, O_WRONLY | O_APPEND);
 	}
 
+	free(buffer);
 	fc = close(fd_from);
 	if (fc == -1)
 		error_msg(100, NULL, 0, fd_from);
