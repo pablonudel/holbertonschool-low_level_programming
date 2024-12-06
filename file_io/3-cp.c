@@ -41,8 +41,8 @@ void copy_file(char *file_from, char *file_to)
 	}
 
 	fd_from = open(file_from, O_RDONLY);
-	fd_to = open(file_to, O_WRONLY | O_CREAT | O_TRUNC, 0664);
 	fr = read(fd_from, buffer, 1024);
+	fd_to = open(file_to, O_WRONLY | O_CREAT | O_TRUNC, 0664);
 
 	do {
 		if (fd_from == -1 || fr == -1)
