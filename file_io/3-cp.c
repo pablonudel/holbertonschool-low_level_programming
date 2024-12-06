@@ -38,7 +38,7 @@ void copy_file(char *file_from, char *file_to)
 	fd_from = open(file_from, O_RDONLY);
 	fd_to = open(file_to, O_WRONLY | O_CREAT | O_TRUNC, 0664);
 	if (!buffer)
-		f_error(99, 0, fd_to, file_to, buffer);
+		f_error(99, 0, fd_to, file_to, NULL);
 
 	while (fr == 1024)
 	{
