@@ -1,14 +1,15 @@
 #include "main.h"
 /**
- * file_error - print error msgs on the POSIX standard error and exit
+ * f_error - print error msgs on the POSIX standard error and exit
  * @code: exit code number
  * @fd_from: return of open/rean file_from
  * @fd_to: return of open/rean file_to
  * @file_name: file name
+ * @buffer: buffer
  *
  * Return: void
  */
-void file_error(int code, int fd_from, int fd_to, char *file_name)
+void f_error(int code, int fd_from, int fd_to, char *file_name, char *buffer)
 {
 	if (fd_from == -1)
 	{
@@ -18,7 +19,8 @@ void file_error(int code, int fd_from, int fd_to, char *file_name)
 	{
 		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", file_name);
 	}
-
+	if (buffer)
+		free(buffer);
 	exit(code);
 }
 /**
@@ -31,24 +33,27 @@ void file_error(int code, int fd_from, int fd_to, char *file_name)
 void copy_file(char *file_from, char *file_to)
 {
 	int fd_from, fd_to, fw, fc, fr = 1024;
-	char *buffer[1024];
+	char *buffer = malloc(sizeof(char) * 1024);
 
 	fd_from = open(file_from, O_RDONLY);
 	fd_to = open(file_to, O_WRONLY | O_CREAT | O_TRUNC, 0664);
+	if (!buffer)
+		f_error(99, 0, fd_to, file_to, buffer);
 
 	while (fr == 1024)
 	{
 		fr = read(fd_from, buffer, 1024);
 		if (fd_from == -1 || fr == -1)
-			file_error(98, fd_from, 0, file_from);
+			f_error(98, fd_from, 0, file_from, buffer);
 
 		fw = write(fd_to, buffer, fr);
 		if (fd_to == -1 || fw == -1)
-			file_error(99, 0, fd_to, file_to);
+			f_error(99, 0, fd_to, file_to, buffer);
 
 		fd_to = open(file_to, O_WRONLY | O_APPEND);
 	}
 
+	free(buffer);
 	fc = close(fd_from);
 	if (fc == -1)
 	{
