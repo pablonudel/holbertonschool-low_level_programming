@@ -40,8 +40,9 @@ void copy_file(char *file_from, char *file_to)
 	fd_from = open(file_from, O_RDONLY);
 	fd_to = open(file_to, O_WRONLY | O_CREAT | O_TRUNC, 0664);
 
-	while (fr > 0)
+	while (fr == 1024)
 	{
+		fr = read(fd_from, buffer, 1024);
 		if (fd_from == -1 || fr == -1)
 		{
 			free(buffer);
@@ -53,7 +54,6 @@ void copy_file(char *file_from, char *file_to)
 			free(buffer);
 			error_msg(99, file_to, 'w', 0);
 		}
-		fr = read(fd_from, buffer, 1024);
 		fd_to = open(file_to, O_WRONLY | O_APPEND);
 	}
 
