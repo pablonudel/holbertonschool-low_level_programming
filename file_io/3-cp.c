@@ -8,13 +8,42 @@
  */
 int copy_file(char *file_from, char *file_to)
 {
-	int fd;
+	int fd, fr, fw, fc, i = 0;
+	char buffer[1024];
 
 	if (!file_from)
 	{
-		dprintf(2, "Error: Can't read from file %s", file_from);
+		dprintf(2, "Error: Can't read from file %s\n", file_from);
 		exit(98);
 	}
+	fd = open(file_from, O_RDONLY);
+	if (fd == -1)
+		return (-1);
+	fr = read(fd, buffer, sizeof(buffer));
+	if (fr == -1)
+		return (-1);
+	while (buffer[i])
+		i++;
+	fc = close(fd);
+	if (fc == -1)
+	{
+		dprintf(2, "Error: Can't close fd  %i\n", fd);
+		exit(100);
+	}
+	fd = open(file_to, O_RDWR | O_CREAT | O_TRUNC, 0664);
+	fw = write(fd, buffer, i);
+	if (fd == -1 || fw == -1)
+	{
+		dprintf(2, "Error: Can't write to file %s\n", file_to);
+		exit(99);
+	}
+	fc = close(fd);
+	if (fc == -1)
+	{
+		dprintf(2, "Error: Can't close fd  %i\n", fd);
+		exit(100);
+	}
+	return (1);
 }
 /**
  * main - check the code
