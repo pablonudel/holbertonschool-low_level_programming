@@ -1,33 +1,26 @@
 #include "main.h"
 /**
- * error_msgs - print error msgs on the POSIX standard error and exit
- * @res: res of operation (open/read/close)
- * @close: res of file to be closed
+ * error_msg - print error msgs on the POSIX standard error and exit
+ * @code: exit code number
  * @file: name of the file
- * @op: char with the error option (r/w/c)
+ * @op: option (r/w)
+ * @fd: file descriptor res to close
  *
  * Return: void
  */
-void error_msgs(int res, int close, char *file, char op)
+void error_msg(int code, char *file, char op, int fd)
 {
-	if (res == -1)
+	if (file && op)
 	{
 		if (op == 'r')
-		{
 			dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", file);
-			exit(98);
-		}
 		if (op == 'w')
-		{
 			dprintf(STDERR_FILENO, "Error: Can't write to file %s\n", file);
-			exit(99);
-		}
-		if (op == 'c')
-		{
-			dprintf(STDERR_FILENO, "Error: Can't close fd  %d\n", close);
-			exit(100);
-		}
 	}
+	else
+		dprintf(STDERR_FILENO, "Error: Can't close fd  %d\n", fd);
+
+	exit(code);
 }
 /**
  * copy_file - copies the content of a file to another file
@@ -42,22 +35,28 @@ void copy_file(char *file_from, char *file_to)
 	char buffer[1024];
 
 	fd_from = open(file_from, O_RDONLY);
-	error_msgs(fd_from, 0, file_from, 'r');
-	fd_to = open(file_to, O_CREAT | O_WRONLY | O_TRUNC | O_APPEND, 0664);
-	error_msgs(fd_to, 0, file_to, 'w');
+	if (fd_from == -1)
+		error_msg(98, file_from, 'r', 0);
+	fd_to = open(file_to, O_WRONLY | O_CREAT | O_TRUNC, 0664);
+	if (fd_to == -1)
+		error_msg(99, file_to, 'w', 0);
 
-	while (tmp_len == 1024)
+	while (tmp_len > 0)
 	{
 		tmp_len = read(fd_from, buffer, 1024);
-		error_msgs(tmp_len, 0, file_from, 'r');
+		if (tmp_len == -1)
+			error_msg(98, file_from, 'r', 0);
 		fw = write(fd_to, buffer, tmp_len);
-		error_msgs(fw, 0, file_to, 'w');
+		if (fw == -1)
+			error_msg(99, file_to, 'w', 0);
 	}
 
 	fc = close(fd_from);
-	error_msgs(fc, fd_from, NULL, 'c');
+	if (fc == -1)
+		error_msg(100, NULL, 0, fd_from);
 	fc = close(fd_to);
-	error_msgs(fc, fd_to, NULL, 'c');
+	if (fc == -1)
+		error_msg(100, NULL, 0, fd_to);
 }
 /**
  * main - check the code
