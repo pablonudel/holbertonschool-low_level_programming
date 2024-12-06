@@ -13,7 +13,7 @@ int copy_file(char *file_from, char *file_to)
 
 	if (!file_from)
 	{
-		dprintf(2, "Error: Can't read from file %s\n", file_from);
+		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", file_from);
 		exit(98);
 	}
 	fd = open(file_from, O_RDONLY);
@@ -27,20 +27,20 @@ int copy_file(char *file_from, char *file_to)
 	fc = close(fd);
 	if (fc == -1)
 	{
-		dprintf(2, "Error: Can't close fd  %i\n", fd);
+		dprintf(STDERR_FILENO, "Error: Can't close fd  %i\n", fd);
 		exit(100);
 	}
 	fd = open(file_to, O_RDWR | O_CREAT | O_TRUNC, 0664);
 	fw = write(fd, buffer, i);
 	if (fd == -1 || fw == -1)
 	{
-		dprintf(2, "Error: Can't write to file %s\n", file_to);
+		dprintf(STDERR_FILENO, "Error: Can't write to file %s\n", file_to);
 		exit(99);
 	}
 	fc = close(fd);
 	if (fc == -1)
 	{
-		dprintf(2, "Error: Can't close fd  %i\n", fd);
+		dprintf(STDERR_FILENO, "Error: Can't close fd  %i\n", fd);
 		exit(100);
 	}
 	return (1);
@@ -56,7 +56,7 @@ int main(int ac, char **av)
 {
 	if (ac != 3)
 	{
-		dprintf(2, "Usage: %s file_from file_to\n", av[0]);
+		dprintf(STDERR_FILENO, "Usage: %s file_from file_to\n", av[0]);
 		exit(97);
 	}
 	copy_file(av[1], av[2]);
