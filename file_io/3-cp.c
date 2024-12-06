@@ -32,13 +32,15 @@ void f_error(int code, int fd_from, int fd_to, char *file_name, char *buffer)
 	if (fd_from == -1)
 	{
 		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", file_name);
+		free(buffer);
+		exit(code);
 	}
 	if (fd_to == -1)
 	{
 		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", file_name);
+		free(buffer);
+		exit(code);
 	}
-	free(buffer);
-	exit(code);
 }
 /**
  * main - copies the content of a file to another file
@@ -65,11 +67,9 @@ int main(int ac, char **av)
 	fd_to = open(av[2], O_CREAT | O_WRONLY | O_TRUNC, 0664);
 
 	do {
-		if (fd_from == -1 || fr == -1)
-			f_error(98, fd_from, 0, av[1], buffer);
+		f_error(98, fd_from, 0, av[1], buffer);
 		fw = write(fd_to, buffer, fr);
-		if (fd_to == -1 || fw == -1)
-			f_error(99, 0, fd_to, av[2], buffer);
+		f_error(99, 0, fd_to, av[2], buffer);
 		fr = read(fd_from, buffer, 1024);
 		fd_to = open(av[2], O_WRONLY | O_APPEND);
 	} while (fr > 0);
