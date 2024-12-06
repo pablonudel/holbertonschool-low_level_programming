@@ -32,26 +32,25 @@ void f_error(int code, int fd_from, int fd_to, char *file_name, char *buffer)
  */
 void copy_file(char *file_from, char *file_to)
 {
-	int fd_from, fd_to, fw, fc, fr = 1024;
+	int fd_from, fd_to, fw, fc, fr;
 	char *buffer = malloc(sizeof(char) * 1024);
 
 	fd_from = open(file_from, O_RDONLY);
 	fd_to = open(file_to, O_WRONLY | O_CREAT | O_TRUNC, 0664);
+	fr = read(fd_from, buffer, 1024);
 	if (!buffer)
 		f_error(99, 0, fd_to, file_to, NULL);
 
-	while (fr == 1024)
-	{
-		fr = read(fd_from, buffer, 1024);
+	do {
 		if (fd_from == -1 || fr == -1)
 			f_error(98, fd_from, 0, file_from, buffer);
-
 		fw = write(fd_to, buffer, fr);
 		if (fd_to == -1 || fw == -1)
 			f_error(99, 0, fd_to, file_to, buffer);
 
+		fr = read(fd_from, buffer, 1024);
 		fd_to = open(file_to, O_WRONLY | O_APPEND);
-	}
+	} while (fr > 0);
 
 	free(buffer);
 	fc = close(fd_from);
