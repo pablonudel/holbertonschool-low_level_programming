@@ -43,7 +43,7 @@ int copy_file(char *file_from, char *file_to)
 
 	fd_from = open(file_from, O_RDONLY);
 	error_msgs(fd_from, 0, file_from, 'r');
-	fd_to = open(file_to, O_RDWR | O_CREAT | O_TRUNC, 0664);
+	fd_to = open(file_to, O_RDWR | O_CREAT | O_TRUNC | O_APPEND, 0664);
 	error_msgs(fd_to, 0, file_to, 'w');
 
 	while (tmp_len == 1024)
