@@ -24,7 +24,7 @@ void error_msgs(int res, int close, char *file, char op)
 		}
 		if (op == 'c')
 		{
-			dprintf(STDERR_FILENO, "Error: Can't close fd  %i\n", close);
+			dprintf(STDERR_FILENO, "Error: Can't close fd  %d\n", close);
 			exit(100);
 		}
 	}
@@ -34,9 +34,9 @@ void error_msgs(int res, int close, char *file, char op)
  * @file_from: string with name of the file to copy from.
  * @file_to: string with the name of the file to copy to.
  *
- * Return: 1 on success and -1 on failure
+ * Return: void
  */
-int copy_file(char *file_from, char *file_to)
+void copy_file(char *file_from, char *file_to)
 {
 	int fd_from, fd_to, fw, fc, tmp_len = 1024;
 	char buffer[1024];
@@ -58,7 +58,6 @@ int copy_file(char *file_from, char *file_to)
 	error_msgs(fc, fd_from, NULL, 'c');
 	fc = close(fd_to);
 	error_msgs(fc, fd_to, NULL, 'c');
-	return (1);
 }
 /**
  * main - check the code
