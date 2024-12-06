@@ -51,7 +51,7 @@ void copy_file(char *file_from, char *file_to)
 		fw = write(fd_to, buffer, fr);
 		if (fd_to == -1 || fw == -1)
 			f_error(99, 0, fd_to, file_to, buffer);
-		
+
 		fr = read(fd_from, buffer, 1024);
 		fd_to = open(file_to, O_WRONLY | O_APPEND);
 	} while (fr > 0);
