@@ -1,5 +1,35 @@
 #include "main.h"
 /**
+ * error_msgs - print error msgs on the POSIX standard error and exit
+ * @res: res of operation (open/read/close)
+ * @close: res of file to be closed
+ * @file: name of the file
+ * @op: char with the error option (r/w/c)
+ *
+ * Return: void
+ */
+void error_msgs(int res, int close, char *file, char op)
+{
+	if (res == -1)
+	{
+		if (op == 'r')
+		{
+			dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", file);
+			exit(98);
+		}
+		if (op == 'w')
+		{
+			dprintf(STDERR_FILENO, "Error: Can't write to file %s\n", file);
+			exit(99);
+		}
+		if (op == 'c')
+		{
+			dprintf(STDERR_FILENO, "Error: Can't close fd  %i\n", close);
+			exit(100);
+		}
+	}
+}
+/**
  * copy_file - copies the content of a file to another file
  * @file_from: string with name of the file to copy from.
  * @file_to: string with the name of the file to copy to.
@@ -12,46 +42,22 @@ int copy_file(char *file_from, char *file_to)
 	char buffer[1024];
 
 	fd_from = open(file_from, O_RDONLY);
-	if (fd_from == -1)
-	{
-		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", file_from);
-		exit(98);
-	}
+	error_msgs(fd_from, 0, file_from, 'r');
 	fd_to = open(file_to, O_RDWR | O_CREAT | O_TRUNC, 0664);
-	if (fd_to == -1)
-	{
-		dprintf(STDERR_FILENO, "Error: Can't write to file %s\n", file_to);
-		exit(99);
-	}
+	error_msgs(fd_to, 0, file_to, 'w');
 
 	while (tmp_len == 1024)
 	{
 		tmp_len = read(fd_from, buffer, 1024);
-		if (tmp_len == -1)
-		{
-			dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", file_from);
-			exit(98);
-		}
+		error_msgs(tmp_len, 0, file_from, 'r');
 		fw = write(fd_to, buffer, tmp_len);
-		if (fw == -1)
-		{
-			dprintf(STDERR_FILENO, "Error: Can't write to file %s\n", file_to);
-			exit(99);
-		}
+		error_msgs(fw, 0, file_to, 'w');
 	}
 
 	fc = close(fd_from);
-	if (fc == -1)
-	{
-		dprintf(STDERR_FILENO, "Error: Can't close fd  %i\n", fd_from);
-		exit(100);
-	}
+	error_msgs(fc, fd_from, NULL, 'c');
 	fc = close(fd_to);
-	if (fc == -1)
-	{
-		dprintf(STDERR_FILENO, "Error: Can't close fd  %i\n", fd_to);
-		exit(100);
-	}
+	error_msgs(fc, fd_to, NULL, 'c');
 	return (1);
 }
 /**
