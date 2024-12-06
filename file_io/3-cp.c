@@ -32,7 +32,7 @@ void error_msg(int code, char *file, char op, int fd)
 void copy_file(char *file_from, char *file_to)
 {
 	int fd_from, fd_to, fw, fc, tmp_len = 1024;
-	char buffer[1024];
+	char *buffer;
 
 	fd_from = open(file_from, O_RDONLY);
 	if (fd_from == -1)
@@ -41,14 +41,24 @@ void copy_file(char *file_from, char *file_to)
 	if (fd_to == -1)
 		error_msg(99, file_to, 'w', 0);
 
+	buffer = malloc(sizeof(char) * 1024);
+	if (!buffer)
+		error_msg(99, file_to, 'w', 0);
+
 	while (tmp_len == 1024)
 	{
 		tmp_len = read(fd_from, buffer, 1024);
 		if (tmp_len == -1)
+		{
+			free(buffer);
 			error_msg(98, file_from, 'r', 0);
+		}
 		fw = write(fd_to, buffer, tmp_len);
 		if (fw == -1)
+		{
+			free(buffer);
 			error_msg(99, file_to, 'w', 0);
+		}
 	}
 
 	fc = close(fd_from);
