@@ -35,11 +35,15 @@ void copy_file(char *file_from, char *file_to)
 	int fd_from, fd_to, fw, fc, fr;
 	char *buffer = malloc(sizeof(char) * 1024);
 
+	if (!buffer)
+	{
+		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", file_to);
+		exit(99);
+	}
+
 	fd_from = open(file_from, O_RDONLY);
 	fd_to = open(file_to, O_WRONLY | O_CREAT | O_TRUNC, 0664);
 	fr = read(fd_from, buffer, 1024);
-	if (!buffer)
-		f_error(99, 0, fd_to, file_to, NULL);
 
 	do {
 		if (fd_from == -1 || fr == -1)
