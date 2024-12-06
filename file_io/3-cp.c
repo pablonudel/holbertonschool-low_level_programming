@@ -1,40 +1,33 @@
 #include "main.h"
 /**
- * f_error - print error msg on the POSIX standard error and exit
- * @fd_from: return of open/rean file_from
- * @fd_to: return of open/rean file_to
- * @av: command arguments
- * @buffer: buffer
+ * buff - generate buffer
+ * @file_name: file where the buffer content will be copied
  *
- * Return: void
+ * Return: the buffer
  */
-void f_error(int fd_from, int fd_to, char **av, char *buffer)
+char *buff(char *file_name)
 {
-	if (fd_from == -1)
+	char *buffer = malloc(sizeof(char) * 1024);
+
+	if (buffer == NULL)
 	{
-		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", av[1]);
-		free(buffer);
-		exit(98);
-	}
-	if (fd_to == -1)
-	{
-		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", av[2]);
-		free(buffer);
+		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", file_name);
 		exit(99);
 	}
+
+	return (buffer);
 }
 /**
- * c_error - print error msg on the POSIX standard error and exit
- * @fc: res of close file
- * @fd: res of file descritor to be closed
- *
- * Return: void
+ * file_close - Close files
+ * @fd: file descriptor to be closed
  */
-void c_error(int fc, int fd)
+void file_close(int fd)
 {
+	int fc = close(fd);
+
 	if (fc == -1)
 	{
-		dprintf(STDERR_FILENO, "Error: Can't close fd  %d\n", fd);
+		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", fd);
 		exit(100);
 	}
 }
@@ -47,7 +40,7 @@ void c_error(int fc, int fd)
  */
 int main(int ac, char **av)
 {
-	int fd_from, fd_to, fc, fr, fw;
+	int fd_from, fd_to, fr, fw;
 	char *buffer;
 
 	if (ac != 3)
@@ -56,31 +49,34 @@ int main(int ac, char **av)
 		exit(97);
 	}
 
+	buffer = buff(av[2]);
 	fd_from = open(av[1], O_RDONLY);
-	buffer = malloc(sizeof(char) * 1024);
-	if (!buffer)
-	{
-		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", av[2]);
-		exit(99);
-	}
 	fr = read(fd_from, buffer, 1024);
 	fd_to = open(av[2], O_CREAT | O_WRONLY | O_TRUNC, 0664);
-	f_error(fd_from, fd_to, av, buffer);
 
 	do {
-		if (fr == -1)
-			f_error(fr, 0, av, buffer);
-		fw = write(fd_to, buffer, fr);
-		if (fw == -1)
-			f_error(0, fw, av, buffer);
+		if (fd_from == -1 || fr == -1)
+		{
+			dprintf(STDERR_FILENO,
+					"Error: Can't read from file %s\n", av[1]);
+			free(buffer);
+			exit(98);
+		}
+		fw = write(fd_to, buffer, fw);
+		if (fd_to == -1 || fw == -1)
+		{
+			dprintf(STDERR_FILENO,
+					"Error: Can't write to %s\n", av[2]);
+			free(buffer);
+			exit(99);
+		}
 		fr = read(fd_from, buffer, 1024);
 		fd_to = open(av[2], O_WRONLY | O_APPEND);
+
 	} while (fr > 0);
 
 	free(buffer);
-	fc = close(fd_from);
-	c_error(fc, fd_from);
-	fc = close(fd_to);
-	c_error(fc, fd_to);
+	file_close(fd_from);
+	file_close(fd_to);
 	return (0);
 }
