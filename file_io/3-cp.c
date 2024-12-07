@@ -75,6 +75,7 @@ int main(int argc, char *argv[])
 			f_error(0, -1, argv, buffer);
 		fr = read(fd_from, buffer, 1024);
 		fd_to = open(argv[2], O_WRONLY | O_APPEND);
+		f_error(0, fd_to, argv, buffer);
 	} while (fr > 0);
 
 	free(buffer);
