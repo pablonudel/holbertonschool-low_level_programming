@@ -1,27 +1,16 @@
 #include "main.h"
 /**
  * f_error - print error msg on the POSIX standard error and exit
- * @fd_from: return of open/rean file_from
- * @fd_to: return of open/rean file_to
- * @argv: command arguments
- * @buffer: buffer
+ * @err_msg: string with error msg
+ * @file_name: file
+ * @code: error code
  *
  * Return: void
  */
-void f_error(int fd_from, int fd_to, char *argv[], char *buffer)
+void f_error(char *err_msg, char *file_name, int code)
 {
-	if (fd_from == -1)
-	{
-		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
-		free(buffer);
-		exit(98);
-	}
-	if (fd_to == -1)
-	{
-		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
-		free(buffer);
-		exit(99);
-	}
+	dprintf(STDERR_FILENO, err_msg, file_name);
+	exit(code);
 }
 /**
  * c_error - print error msg on the POSIX standard error and exit
@@ -30,13 +19,10 @@ void f_error(int fd_from, int fd_to, char *argv[], char *buffer)
  *
  * Return: void
  */
-void c_error(int fc, int fd)
+void c_error(int fd)
 {
-	if (fc == -1)
-	{
-		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", fd);
-		exit(100);
-	}
+	dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", fd);
+	exit(100);
 }
 /**
  * main - copies the content of a file to another file
@@ -47,8 +33,8 @@ void c_error(int fc, int fd)
  */
 int main(int argc, char *argv[])
 {
-	int fd_from, fd_to, fc, fr, fw;
-	char *buffer;
+	int fd_from, fd_to, fr, fw;
+	char *buffer[1024];
 
 	if (argc != 3)
 	{
@@ -57,31 +43,25 @@ int main(int argc, char *argv[])
 	}
 
 	fd_from = open(argv[1], O_RDONLY);
-	buffer = malloc(sizeof(char) * 1024);
-	if (!buffer)
-	{
-		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
-		exit(99);
-	}
-	fr = read(fd_from, buffer, 1024);
+	if (fd_from == -1)
+		f_error("Error: Can't read from file %s\n", argv[1], 98);
 	fd_to = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC, 0664);
-	f_error(fd_from, fd_to, argv, buffer);
+	if (fd_to == -1)
+		f_error("Error: Can't write to file %s\n", argv[2], 99);
 
 	do {
-		if (fr == -1)
-			f_error(-1, 0, argv, buffer);
+		if (fr == -1 || fd_from == -1)
+			f_error("Error: Can't read from file %s\n", argv[1], 98);
 		fw = write(fd_to, buffer, fr);
-		if (fw == -1)
-			f_error(0, -1, argv, buffer);
+		if (fw == -1 || fd_to == -1)
+			f_error("Error: Can't write to file %s\n", argv[2], 99);
 		fr = read(fd_from, buffer, 1024);
 		fd_to = open(argv[2], O_WRONLY | O_APPEND);
-		f_error(0, fd_to, argv, buffer);
 	} while (fr > 0);
 
-	free(buffer);
-	fc = close(fd_from);
-	c_error(fc, fd_from);
-	fc = close(fd_to);
-	c_error(fc, fd_to);
+	if (close(fd_from) == -1)
+		c_error(fd_from);
+	if (close(fd_to) == -1)
+		c_error(fd_to);
 	return (0);
 }
