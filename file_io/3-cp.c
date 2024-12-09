@@ -16,7 +16,7 @@ void f_error(char *file, int code)
 	if (code == 99)
 	{
 		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", file);
-		exit(99);
+		exit(code);
 	}
 }
 /**
