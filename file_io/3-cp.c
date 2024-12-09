@@ -61,7 +61,7 @@ void copy_file(char *file_from, char *file_to)
 	{
 		fr = read(fd_from, buffer, 1024);
 		if (fr == -1 || fd_from == -1)
-			f_error(fd_from, NULL);
+			f_error(file_from, NULL);
 
 		if (fr > 0)
 		{
