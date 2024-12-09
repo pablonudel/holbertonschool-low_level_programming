@@ -64,7 +64,6 @@ void copy_file(char *file_from, char *file_to)
 		}
 	}
 
-	free(buffer);
 	if (close(fd_from) == -1)
 		c_error(fd_from);
 	if (close(fd_to) == -1)
