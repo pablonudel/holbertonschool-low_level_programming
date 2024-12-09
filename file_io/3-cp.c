@@ -15,7 +15,7 @@ void f_error(char *file_from, char *file_to)
 	}
 	if (file_to)
 	{
-		dprintf(STDERR_FILENO, "Error: Can't write to file %s\n", file_to);
+		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", file_to);
 		exit(99);
 	}
 }
