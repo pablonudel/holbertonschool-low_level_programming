@@ -51,7 +51,7 @@ void copy_file(char *file_from, char *file_to)
 
 	fd_from = open(file_from, O_RDONLY);
 	fd_to = open(file_to, O_CREAT | O_WRONLY | O_TRUNC, 0664);
-	if (fd_to == -1)
+	if (fd_from == -1 || fd_to == -1)
 		f_error(file_from, file_to);
 
 	fr = 1;
