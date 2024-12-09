@@ -1,21 +1,21 @@
 #include "main.h"
 /**
  * f_error - print error msg on the POSIX standard error and exit
- * @file_from: origin file name
- * @file_to: destination file name
+ * @file: file to open/read/write
+ * @code: error code
  *
  * Return: void
  */
-void f_error(char *file_from, char *file_to)
+void f_error(char *file, int code)
 {
-	if (file_from)
+	if (code == 98)
 	{
-		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", file_from);
-		exit(98);
+		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", file);
+		exit(code);
 	}
-	if (file_to)
+	if (code == 99)
 	{
-		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", file_to);
+		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", file);
 		exit(99);
 	}
 }
@@ -50,13 +50,13 @@ void copy_file(char *file_from, char *file_to)
 	{
 		fr = read(fd_from, buffer, 1024);
 		if (fr == -1 || fd_from == -1)
-			f_error(file_from, NULL);
+			f_error(file_from, 98);
 
 		if (fr > 0)
 		{
 			fw = write(fd_to, buffer, fr);
 			if (fw != fr || fw == -1 || fd_to == -1)
-				f_error(NULL, file_to);
+				f_error(file_to, 99);
 		}
 	}
 
