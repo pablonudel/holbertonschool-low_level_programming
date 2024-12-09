@@ -66,8 +66,10 @@ void copy_file(char *file_from, char *file_to)
 		if (fr > 0)
 		{
 			fw = write(fd_to, buffer, fr);
-			if (fw != fr || fw == -1)
+			if (fw == -1)
 				f_error(NULL, file_to);
+			if (fw != fr)
+				f_error(file_from, NULL);
 		}
 	}
 
