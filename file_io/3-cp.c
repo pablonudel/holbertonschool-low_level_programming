@@ -60,15 +60,13 @@ void copy_file(char *file_from, char *file_to)
 	while (fr)
 	{
 		fr = read(fd_from, buffer, 1024);
-		if (fr == -1)
-			f_error(file_from, NULL);
+		if (fr == -1 || fd_from == -1)
+			f_error(fd_from, NULL);
 
 		if (fr > 0)
 		{
 			fw = write(fd_to, buffer, fr);
-			if (fw == -1)
-				f_error(NULL, file_to);
-			if (fw != fr)
+			if (fw != fr || fw == -1 || fd_to == -1)
 				f_error(NULL, file_to);
 		}
 	}
