@@ -69,7 +69,7 @@ void copy_file(char *file_from, char *file_to)
 			if (fw == -1)
 				f_error(NULL, file_to);
 			if (fw != fr)
-				f_error(file_from, NULL);
+				f_error(NULL, file_to);
 		}
 	}
 
