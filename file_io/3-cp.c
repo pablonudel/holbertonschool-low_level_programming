@@ -40,14 +40,7 @@ void c_error(int fd)
 void copy_file(char *file_from, char *file_to)
 {
 	int fd_from, fd_to, fr, fw;
-	char *buffer;
-
-	buffer = malloc(sizeof(char) * 1024);
-	if (buffer == NULL)
-	{
-		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", file_to);
-		exit(99);
-	}
+	char *buffer[1024];
 
 	fd_from = open(file_from, O_RDONLY);
 	if (fd_from == -1)
