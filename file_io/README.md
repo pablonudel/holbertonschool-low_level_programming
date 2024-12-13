@@ -3,7 +3,7 @@
 This repository contains a collection of exercises focused on File Input/Output (I/O) in the C programming language. The exercises explore low-level file operations, system calls, and file descriptors. The primary goal of this project is to understand how to interact with the operating system to create, read, write, and manipulate files in a Unix-like environment.
 
 
-## Requirements & Tasks
+## Project Requirements
 
 - Compilation on Ubuntu 20.04 LTS using `gcc -Wall -Werror -Wextra -pedantic -std=gnu89`
 - Code use the `Betty` style. It will be checked using [betty-style.pl](https://github.com/hs-hq/Betty/blob/master/betty-style.pl) and [betty-doc.pl](https://github.com/hs-hq/Betty/blob/master/betty-doc.pl)
@@ -13,6 +13,9 @@ This repository contains a collection of exercises focused on File Input/Output 
 - Allowed syscalls: `read`, `write`, `open`, `close`
 - Allowed to use [_putchar](https://github.com/hs-hq/_putchar.c/blob/master/_putchar.c)
 - The prototypes of all your functions and the prototype of the function `_putchar` should be included in the header file called [main.h](https://github.com/pablonudel/holbertonschool-low_level_programming/blob/main/file_io/main.h)
+
+## Tasks
+
 ### 0. Tread lightly, she is near
 Function that reads a text file and prints it to the POSIX standard output.
 
