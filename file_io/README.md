@@ -3,7 +3,7 @@
 This repository contains a collection of exercises focused on File Input/Output (I/O) in the C programming language. The exercises explore low-level file operations, system calls, and file descriptors. The primary goal of this project is to understand how to interact with the operating system to create, read, write, and manipulate files in a Unix-like environment.
 
 
-# Project Requirements & Tasks
+# Project requirements & Tasks
 
 - Compilation on Ubuntu 20.04 LTS using `gcc -Wall -Werror -Wextra -pedantic -std=gnu89`
 - Code use the `Betty` style. It will be checked using [betty-style.pl](https://github.com/hs-hq/Betty/blob/master/betty-style.pl) and [betty-doc.pl](https://github.com/hs-hq/Betty/blob/master/betty-doc.pl)
