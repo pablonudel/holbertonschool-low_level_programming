@@ -15,6 +15,7 @@ This repository contains a collection of exercises focused on File Input/Output 
 - The prototypes of all your functions and the prototype of the function `_putchar` should be included in the header file called [main.h](https://github.com/pablonudel/holbertonschool-low_level_programming/blob/main/file_io/main.h)
 
 ## 0. Tread lightly, she is near
+
 Function that reads a text file and prints it to the POSIX standard output.
 
 - Prototype: `ssize_t read_textfile(const char *filename, size_t letters);`
@@ -27,6 +28,7 @@ Function that reads a text file and prints it to the POSIX standard output.
 File: [0-read_textfile.c](https://github.com/pablonudel/holbertonschool-low_level_programming/blob/main/file_io/0-read_textfile.c)
 
 ## 1. Under the snow
+
 Function that creates a file.
 
 - Prototype: `int create_file(const char *filename, char *text_content);`
@@ -40,6 +42,7 @@ Function that creates a file.
 File: [1-create_file.c](https://github.com/pablonudel/holbertonschool-low_level_programming/blob/main/file_io/1-create_file.c)
 
 ## 2. Speak gently, she can hear
+
 Function that appends text at the end of a file.
 
 - Prototype: `int append_text_to_file(const char *filename, char *text_content);`
@@ -52,6 +55,7 @@ Function that appends text at the end of a file.
 File: [2-append_text_to_file.c](https://github.com/pablonudel/holbertonschool-low_level_programming/blob/main/file_io/2-append_text_to_file.c)
 
 ## 3. cp
+
 Program that copies the content of a file to another file.
 
 - Usage: `cp file_from file_to`
